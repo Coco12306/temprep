@@ -9,7 +9,7 @@
 # pip install -r ./recognize-anything/requirements.txt
 # pip install -e ./recognize-anything/
 from huggingface_hub import login
-login("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")
+login("")
 
 import huggingface_hub as hfh
 if not hasattr(hfh, "cached_download"):
