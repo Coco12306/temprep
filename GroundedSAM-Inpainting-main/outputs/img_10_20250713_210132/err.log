@@ -1,0 +1,7 @@
+
+Traceback (most recent call last):
+  File "/home/wan/geopipeline/GroundedSAM-Inpainting-main/run_pipeline.py", line 155, in <module>
+    main()
+  File "/home/wan/geopipeline/GroundedSAM-Inpainting-main/run_pipeline.py", line 106, in main
+    target_json = out_dir / Path(analysis_json).name
+UnboundLocalError: local variable 'analysis_json' referenced before assignment

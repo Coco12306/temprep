@@ -1,0 +1,16 @@
+{
+  "orig_top": {
+    "street": "Western Avenue",
+    "city": "South Paris",
+    "country": "United States (Maine)",
+    "confidence_score": 0.45
+  },
+  "new_top": {
+    "street": "Main Street (near the Town Hall/Courthouse)",
+    "city": "New Sweden (or nearby town), Aroostook County",
+    "country": "United States (Maine)",
+    "confidence_score": 0.38
+  },
+  "distance_km": 354.9503062020181,
+  "new_analysis_json": "analysis_20250713_202811.json"
+}

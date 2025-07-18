@@ -1,0 +1,16 @@
+{
+  "orig_top": {
+    "street": "Dole Street & University Avenue",
+    "city": "Honolulu (Mānoa / Moʻiliʻili area)",
+    "country": "United States (Hawaii)",
+    "confidence_score": 0.78
+  },
+  "new_top": {
+    "street": "University Ave & S. Beretania St (approx.)",
+    "city": "Honolulu, O‘ahu",
+    "country": "United States (Hawaii)",
+    "confidence_score": 0.55
+  },
+  "distance_km": 5.64594745867137,
+  "new_analysis_json": "analysis_20250713_215519.json"
+}

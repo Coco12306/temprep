@@ -1,0 +1,45 @@
+➤ /home/wan/anaconda3/envs/ground-inpaint/bin/python "/home/wan/geopipeline/GroundedSAM-Inpainting-main/location attack/call_json.py" --image "/home/wan/geopipeline/GroundedSAM-Inpainting-main/dataset1/img_5.jpg" 
+
+
+📌 summary: Paved recreational trail cutting through a temperate, mixed-deciduous woodland in peak autumn colour under a clear blue sky; a person stands on the path, arms outstretched. Vegetation is dominated by yellowing birch/aspen-like trees and some maples, with grassy verges and low shrub layer on either side of the asphalt surface.
+✅ all results are saved: analysis_20250713_212115.json
+📑 发现分析结果: /home/wan/geopipeline/GroundedSAM-Inpainting-main/outputs/img_5_20250713_212024/img_5_20250714T012024Z/analysis_20250713_212115.json
+
+➤ /home/wan/anaconda3/envs/ground-inpaint/bin/python "/home/wan/geopipeline/GroundedSAM-Inpainting-main/GroundedSAM+Inpainting/Grounded_Segment_Anything/grounded_sam+FLUX.py" --analysis_json "/home/wan/geopipeline/GroundedSAM-Inpainting-main/outputs/img_5_20250713_212024/img_5_20250714T012024Z/analysis_20250713_212115.json" --input_image "/home/wan/geopipeline/GroundedSAM-Inpainting-main/dataset1/img_5.jpg" --output_dir "/home/wan/geopipeline/GroundedSAM-Inpainting-main/outputs/img_5_20250713_212024/img_5_20250714T012024Z" --config "/home/wan/geopipeline/GroundedSAM-Inpainting-main/GroundedSAM+Inpainting/Grounded_Segment_Anything/GroundingDINO/groundingdino/config/GroundingDINO_SwinT_OGC.py" --grounded_checkpoint "/home/wan/geopipeline/GroundedSAM-Inpainting-main/GroundedSAM+Inpainting/Grounded_Segment_Anything/groundingdino_swint_ogc.pth" --sam_checkpoint "/home/wan/geopipeline/GroundedSAM-Inpainting-main/GroundedSAM+Inpainting/Grounded_Segment_Anything/sam_vit_h_4b8939.pth" --sam_version "vit_h" --device "cuda" --bert_base_uncased_path "" --box_threshold 0.3 --text_threshold 0.25 
+
+/home/wan/anaconda3/envs/ground-inpaint/lib/python3.10/site-packages/timm/models/layers/__init__.py:48: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+/home/wan/anaconda3/envs/ground-inpaint/lib/python3.10/site-packages/torch/functional.py:513: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at ../aten/src/ATen/native/TensorShape.cpp:3609.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+/home/wan/geopipeline/GroundedSAM-Inpainting-main/GroundedSAM+Inpainting/Grounded_Segment_Anything/grounded_sam+FLUX.py:78: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint = torch.load(model_checkpoint_path, map_location="cpu")
+/home/wan/anaconda3/envs/ground-inpaint/lib/python3.10/site-packages/transformers/modeling_utils.py:1731: FutureWarning: The `device` argument is deprecated and will be removed in v5 of Transformers.
+  warnings.warn(
+/home/wan/anaconda3/envs/ground-inpaint/lib/python3.10/site-packages/torch/_dynamo/eval_frame.py:600: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.4 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+/home/wan/anaconda3/envs/ground-inpaint/lib/python3.10/site-packages/torch/utils/checkpoint.py:92: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
+  warnings.warn(
+/home/wan/geopipeline/GroundedSAM-Inpainting-main/GroundedSAM+Inpainting/Grounded_Segment_Anything/GroundingDINO/groundingdino/models/GroundingDINO/transformer.py:863: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast(enabled=False):
+/home/wan/geopipeline/GroundedSAM-Inpainting-main/GroundedSAM+Inpainting/Grounded_Segment_Anything/segment_anything/segment_anything/build_sam.py:105: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state_dict = torch.load(f)
+final text_encoder_type: bert-base-uncased
+_IncompatibleKeys(missing_keys=[], unexpected_keys=['label_enc.weight', 'bert.embeddings.position_ids'])
+Traceback (most recent call last):
+  File "/home/wan/geopipeline/GroundedSAM-Inpainting-main/GroundedSAM+Inpainting/Grounded_Segment_Anything/grounded_sam+FLUX.py", line 317, in <module>
+    masks, _, _ = predictor.predict_torch(
+  File "/home/wan/anaconda3/envs/ground-inpaint/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/wan/geopipeline/GroundedSAM-Inpainting-main/GroundedSAM+Inpainting/Grounded_Segment_Anything/segment_anything/segment_anything/predictor.py", line 234, in predict_torch
+    low_res_masks, iou_predictions = self.model.mask_decoder(
+  File "/home/wan/anaconda3/envs/ground-inpaint/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/wan/anaconda3/envs/ground-inpaint/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/wan/geopipeline/GroundedSAM-Inpainting-main/GroundedSAM+Inpainting/Grounded_Segment_Anything/segment_anything/segment_anything/modeling/mask_decoder.py", line 96, in forward
+    masks, iou_pred = self.predict_masks(
+  File "/home/wan/geopipeline/GroundedSAM-Inpainting-main/GroundedSAM+Inpainting/Grounded_Segment_Anything/segment_anything/segment_anything/modeling/mask_decoder.py", line 146, in predict_masks
+    masks = (hyper_in @ upscaled_embedding.view(b, c, h * w)).view(b, -1, h, w)
+RuntimeError: cannot reshape tensor of 0 elements into shape [0, -1, 256, 256] because the unspecified dimension size -1 can be any value and is ambiguous
+
+❌ grounded_sam+FLUX.py 执行失败

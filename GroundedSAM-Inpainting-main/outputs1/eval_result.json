@@ -1,0 +1,16 @@
+{
+  "orig": {
+    "street": "Dole St & University Ave",
+    "city": "Honolulu, Oʻahu (HI)",
+    "country": "United States",
+    "confidence_score": 0.72
+  },
+  "new": {
+    "street": "George St & University Ave (approx.)",
+    "city": "Honolulu, O‘ahu",
+    "country": "United States (Hawaii)",
+    "confidence_score": 0.55
+  },
+  "distance_km": null,
+  "new_json": "analysis_20250711_201442.json"
+}

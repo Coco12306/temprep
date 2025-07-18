@@ -1,0 +1,16 @@
+{
+  "orig_top": {
+    "street": "Western Ave (ME-26) & Main St",
+    "city": "South Paris",
+    "country": "United States (Maine)",
+    "confidence_score": 0.55
+  },
+  "new_top": {
+    "street": "Main St / Court St",
+    "city": "Farmington",
+    "country": "United States (Maine)",
+    "confidence_score": 0.55
+  },
+  "distance_km": 57.40255190130651,
+  "new_analysis_json": "analysis_20250713_215949.json"
+}

@@ -1,0 +1,178 @@
+{
+  "meta": {
+    "image_path": "/home/wan/geopipeline/GroundedSAM-Inpainting-main/outputs3/MaineStreet_20250713_215520/MaineStreet_20250714T015520Z/inpainted_output_final.jpg",
+    "saved_at": "20250713_215949"
+  },
+  "request": {
+    "system_prompt": "\nYou are an expert Geo-Location Analyst and seasoned GeoGuessr player.\nYour task is to thoroughly analyze the image and identify ALL possible visual, textual, and contextual cues that could reveal or strongly suggest its geographic location.\n\nPlease provide the results in **JSON format** and include the following:\n\n1. **overall_scene_summary**: A brief description of the overall scene in the image. This should include key visual elements (e.g., \"Urban street with modern buildings and palm trees in a warm climate\").\n2. **overall_location_hypothesis**: A list of three possible geographic locations, in the following format:\n   - Please provide the three most likely locations based on the clues in the image and confident score.\n3. **overall_confidence_score**: A confidence score (0.0 to 1.0) for the overall location hypothesis. The higher the number, the more confident the model is in the hypothesis.\n4. **reasoning_process_narrative**: A detailed, step-by-step explanation of how you arrived at the geographic location hypothesis. Please explain the reasoning for each clue you identified.\n\nFor each geographic cue, provide the following details:\n- `cue`: A description of the visual or textual clue.\n- `cue_type`: The type of clue (e.g., Landmark, Vegetation, Textual Signage).\n- `step_by_step_reasoning`: Detailed reasoning for identifying this cue's geographic significance.\n- `specificity`: How unique or specific the cue is. Possible values:\n  - \"globally unique\": The cue is unique worldwide and can almost certainly pinpoint the location.\n  - \"regionally specific\": The cue is identifiable within a particular region or country.\n  - \"common but indicative\": The cue is common but still provides useful geographic information.\n- `confidence_score`: A confidence score (0.0 to 1.0) for the cue's relevance.\n- `approximate_bounding_box`: The location of the cue within the image. Use relative coordinates:\n  - `\"x_min: 0.1, y_min: 0.2, width: 0.3, height: 0.4\"`\n  - `x_min` is the starting x-coordinate (left side of the image),\n  - `y_min` is the starting y-coordinate (top side of the image),\n  - `width` and `height` are the proportions of the image width and height for this bounding box.\n- `requires_ocr`: True if the clue requires OCR, otherwise False.\n- `ocr_hint`: The text that might be relevant for OCR, if applicable.\n- `geo_privacy_risk`: The privacy risk level of the cue. Possible values: \"low\", \"medium\", \"high\".\n- `priority_score`: A score indicating how important the cue is for identifying the location (1 = high priority, 0 = low priority).\n\n\nPlease return the results in the following format:\n\n{\n  \"overall_scene_summary\": \"\",\n  \"overall_location_hypothesis\": [\n    {\"street\": \"\", \"city\": \"\", \"country\": \"\", \"confidence_score\": 0.0},\n    {\"street\": \"\", \"city\": \"\", \"country\": \"\", \"confidence_score\": 0.0},\n    {\"street\": \"\", \"city\": \"\", \"country\": \"\", \"confidence_score\": 0.0}\n  ],\n  \"overall_confidence_score\": 0.0,\n  \"reasoning_process_narrative\": \"\",\n  \"identified_geo_cues\": [\n    {\n      \"cue\": \"\",\n      \"cue_type\": \"\",\n      \"step_by_step_reasoning\": \"\",\n      \"specificity\": \"\",\n      \"confidence_score\": 0.0,\n      \"approximate_bounding_box\": \"\",\n      \"requires_ocr\": false,\n      \"ocr_hint\": \"\",\n      \"geo_privacy_risk\": \"\",  \n      \"priority_score\": 0.0    \n    }\n  ],\n  \"changed_geo_cues\": [\n    {\n      \"original_cue_index\": 0,\n      \"changed_cue_prompt\": \"\",\n      \"rationale\": \"\",\n      \"target_region\": \"\",\n      \"approximate_bounding_box\": \"\"\n    }\n  ],\n  \"unresolved_ambiguities_or_conflicts\": \"\",\n  \"missing_information_needed\": \"\"\n}\n\n---------------------------------------------\n✂️  NEW REQUIREMENT – ‘changed_geo_cues’\n---------------------------------------------\nFor each item in `identified_geo_cues`, devise **one** realistic\n*replacement* that would point to a geographically **different** region\n(ideally on another continent) while fitting naturally into the same\nspot of the image.\n\nReturn them in a `changed_geo_cues` array with this structure:\n\n- original_cue_index      : integer – index into identified_geo_cues\n- changed_cue_prompt      : <English prompt for an in-painting model,\n                             describing exactly what to draw there>\n- rationale               : why this replacement breaks or flips the\n                             original geolocation signal\n- target_region           : the region/country it now suggests\n- approximate_bounding_box: copy the bbox of the original cue\n\nGuidelines for good replacements\n• Keep the object category the same (flag→flag, plate→plate, sign→sign).\n• Choose *visually plausible* alternatives – e.g. “German EU license\n  plate”, “Japanese Kanji street sign”, “Sydney bus stop sign”.\n• Avoid simply saying “blur it”; instead propose a concrete substitute.\n• Do **NOT** change the JSON key names or overall order.\n",
+    "user_message": "Please analyze the photo for geo-location.",
+    "image_base64_prefix": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsL…"
+  },
+  "response": {
+    "model_raw_json": "{\n  \"overall_scene_summary\": \"Small-town civic square in winter. A 19th-century red-brick courthouse with arched windows, a green-roofed clock-cupola and weathervane stands beside a slushy, two-lane street. U.S-style vehicles with Maine-looking plates are parked in front. Two flags—one clearly the Maine state flag and another blue-and-white Franco-American/Acadian heritage flag—fly from a single pole. Signs in English (‘ONE WAY’, ‘PUBLIC PARKING’) and conifer-covered hills complete the scene.\",\n  \"overall_location_hypothesis\": [\n    {\n      \"street\": \"Main St / Court St\",\n      \"city\": \"Farmington\",\n      \"country\": \"United States (Maine)\",\n      \"confidence_score\": 0.55\n    },\n    {\n      \"street\": \"Court St\",\n      \"city\": \"Skowhegan\",\n      \"country\": \"United States (Maine)\",\n      \"confidence_score\": 0.23\n    },\n    {\n      \"street\": \"Church St\",\n      \"city\": \"Belfast\",\n      \"country\": \"United States (Maine)\",\n      \"confidence_score\": 0.12\n    }\n  ],\n  \"overall_confidence_score\": 0.55,\n  \"reasoning_process_narrative\": \"1. The lower flag on the pole is unmistakably the modern Maine state flag (dark blue with the pine-tree-and-moose coat of arms and word ‘MAINE’). That alone pins the location to Maine, USA.\\n2. The upper flag is the blue-and-white chequered Franco-American (sometimes called the ‘Maine Acadian’ or ‘Franco heritage’) flag, further reinforcing a Maine / northern New England setting with strong French-Canadian cultural ties.\\n3. All visible licence plates are white with a small chickadee and pine twig at the left—characteristics of Maine passenger plates. U.S. plates also confirm we are in the United States.\\n4. The civic building style—red brick, Romanesque arches, central cupola with four clock faces and a green metal roof—is textbook late-1800s New England county-courthouse architecture. Comparing historical photos, the closest match is the Franklin County Courthouse in Farmington, Maine.\\n5. Vegetation (white pines) and snow indicate a cold, northern climate consistent with inland Maine in winter.\\n6. Street furniture (standard MUTCD ‘ONE WAY’ and blue ‘PUBLIC PARKING’ signs) point to the United States and not Canada (which would use bilingual or different designs).\\n7. The presence of only U.S. pickup trucks/SUVs with no parallel-parked vehicles and right-hand road orientation supports U.S. setting.\\n8. Alternate Maine courthouses in Skowhegan or Belfast share several traits, so secondary hypotheses are reserved for those towns, but the tower proportions, side windows, and roofline most closely match Farmington’s courthouse.\\nCombining these clues, Farmington, Maine is the most plausible pinpoint with moderate confidence.\",\n  \"identified_geo_cues\": [\n    {\n      \"cue\": \"Maine state flag (dark blue with pine tree, moose and word ‘MAINE’)\",\n      \"cue_type\": \"Flag\",\n      \"step_by_step_reasoning\": \"The Maine flag is unique among U.S. state flags with its specific coat of arms featuring a pine tree and moose. Its presence fixes the state almost unequivocally.\",\n      \"specificity\": \"regionally specific\",\n      \"confidence_score\": 0.95,\n      \"approximate_bounding_box\": \"x_min: 0.55, y_min: 0.55, width: 0.12, height: 0.18\",\n      \"requires_ocr\": false,\n      \"ocr_hint\": \"\",\n      \"geo_privacy_risk\": \"low\",\n      \"priority_score\": 1\n    },\n    {\n      \"cue\": \"Blue-and-white Franco-American heritage flag (checked pattern, white fleur-de-lis cross)\",\n      \"cue_type\": \"Flag\",\n      \"step_by_step_reasoning\": \"This cultural flag is flown predominantly in northern Maine towns with French-Canadian heritage, narrowing the location within the state.\",\n      \"specificity\": \"regionally specific\",\n      \"confidence_score\": 0.7,\n      \"approximate_bounding_box\": \"x_min: 0.55, y_min: 0.48, width: 0.12, height: 0.18\",\n      \"requires_ocr\": false,\n      \"ocr_hint\": \"\",\n      \"geo_privacy_risk\": \"low\",\n      \"priority_score\": 0.7\n    },\n    {\n      \"cue\": \"White licence plates with chickadee and pine sprig (Maine plates) on vehicles\",\n      \"cue_type\": \"Vehicle Licence Plate\",\n      \"step_by_step_reasoning\": \"The chickadee design is unique to Maine passenger plates, confirming the state and the country (USA).\",\n      \"specificity\": \"regionally specific\",\n      \"confidence_score\": 0.8,\n      \"approximate_bounding_box\": \"x_min: 0.18, y_min: 0.77, width: 0.1, height: 0.05\",\n      \"requires_ocr\": false,\n      \"ocr_hint\": \"\",\n      \"geo_privacy_risk\": \"medium\",\n      \"priority_score\": 0.9\n    },\n    {\n      \"cue\": \"Red-brick Romanesque courthouse with green-roofed clock cupola (Franklin County Courthouse design)\",\n      \"cue_type\": \"Landmark/Architecture\",\n      \"step_by_step_reasoning\": \"The building’s architecture closely matches archival images of the Franklin County Courthouse in Farmington, Maine, including arched windows, tower proportions, and chimney placement.\",\n      \"specificity\": \"globally unique\",\n      \"confidence_score\": 0.6,\n      \"approximate_bounding_box\": \"x_min: 0.12, y_min: 0.28, width: 0.68, height: 0.56\",\n      \"requires_ocr\": false,\n      \"ocr_hint\": \"\",\n      \"geo_privacy_risk\": \"low\",\n      \"priority_score\": 1\n    },\n    {\n      \"cue\": \"MUTCD-style ‘ONE WAY’ and ‘PUBLIC PARKING’ signs in English\",\n      \"cue_type\": \"Textual Signage\",\n      \"step_by_step_reasoning\": \"Standard U.S. road signs confirm the country, while lack of French text rules out bilingual Canadian provinces.\",\n      \"specificity\": \"common but indicative\",\n      \"confidence_score\": 0.6,\n      \"approximate_bounding_box\": \"x_min: 0.88, y_min: 0.75, width: 0.12, height: 0.12\",\n      \"requires_ocr\": true,\n      \"ocr_hint\": \"ONE WAY / PUBLIC PARKING\",\n      \"geo_privacy_risk\": \"low\",\n      \"priority_score\": 0.4\n    },\n    {\n      \"cue\": \"Snow-covered ground and evergreen trees (white pines)\",\n      \"cue_type\": \"Vegetation & Climate\",\n      \"step_by_step_reasoning\": \"Snow and northeastern conifers indicate a cold, northern temperate climate consistent with interior Maine in winter months.\",\n      \"specificity\": \"common but indicative\",\n      \"confidence_score\": 0.5,\n      \"approximate_bounding_box\": \"x_min: 0.04, y_min: 0.65, width: 0.92, height: 0.35\",\n      \"requires_ocr\": false,\n      \"ocr_hint\": \"\",\n      \"geo_privacy_risk\": \"low\",\n      \"priority_score\": 0.2\n    },\n    {\n      \"cue\": \"U.S.-style vehicles driving on right (pickup trucks and SUVs)\",\n      \"cue_type\": \"Transport\",\n      \"step_by_step_reasoning\": \"Right-hand traffic and typical American vehicle models confirm North America and specifically U.S. road conventions.\",\n      \"specificity\": \"common but indicative\",\n      \"confidence_score\": 0.45,\n      \"approximate_bounding_box\": \"x_min: 0.25, y_min: 0.73, width: 0.55, height: 0.18\",\n      \"requires_ocr\": false,\n      \"ocr_hint\": \"\",\n      \"geo_privacy_risk\": \"low\",\n      \"priority_score\": 0.25\n    }\n  ],\n  \"changed_geo_cues\": [\n    {\n      \"original_cue_index\": 0,\n      \"changed_cue_prompt\": \"Replace the Maine state flag with the red and white maple-leaf flag of Canada, fully unfurled and lit by the same light.\",\n      \"rationale\": \"Switches the primary state identifier to a national Canadian symbol, pushing the inferred location across the border to Canada.\",\n      \"target_region\": \"Canada (generic)\",\n      \"approximate_bounding_box\": \"x_min: 0.55, y_min: 0.55, width: 0.12, height: 0.18\"\n    },\n    {\n      \"original_cue_index\": 1,\n      \"changed_cue_prompt\": \"Swap the Franco-American heritage flag for a green-white-red vertical tricolour Italian national flag, same size and wind direction.\",\n      \"rationale\": \"Eliminates the Maine-specific Acadian signal and introduces an unrelated Italian cue, muddying the New England hint.\",\n      \"target_region\": \"Italy / Italian community\",\n      \"approximate_bounding_box\": \"x_min: 0.55, y_min: 0.48, width: 0.12, height: 0.18\"\n    },\n    {\n      \"original_cue_index\": 2,\n      \"changed_cue_prompt\": \"Re-render the visible licence plate as a yellow EU-style Dutch plate with blue EU strip and NL lettering.\",\n      \"rationale\": \"Replaces the uniquely Maine plate with a Netherlands-specific plate, relocating the scene to Europe.\",\n      \"target_region\": \"Netherlands\",\n      \"approximate_bounding_box\": \"x_min: 0.18, y_min: 0.77, width: 0.1, height: 0.05\"\n    },\n    {\n      \"original_cue_index\": 3,\n      \"changed_cue_prompt\": \"Transform the courthouse facade into pale sandstone with a small minaret-style tower, keeping scale but giving it Ottoman architectural elements.\",\n      \"rationale\": \"Alters the building style completely, moving it away from New England Romanesque toward Turkish civic architecture.\",\n      \"target_region\": \"Turkey\",\n      \"approximate_bounding_box\": \"x_min: 0.12, y_min: 0.28, width: 0.68, height: 0.56\"\n    },\n    {\n      \"original_cue_index\": 4,\n      \"changed_cue_prompt\": \"Modify the road signs to show French text ‘SENS UNIQUE’ and ‘STATIONNEMENT PUBLIC’, using French road-sign typography and pictograms.\",\n      \"rationale\": \"Converts U.S. English signage into French, steering the viewer toward France or francophone regions.\",\n      \"target_region\": \"France\",\n      \"approximate_bounding_box\": \"x_min: 0.88, y_min: 0.75, width: 0.12, height: 0.12\"\n    },\n    {\n      \"original_cue_index\": 5,\n      \"changed_cue_prompt\": \"Remove snow and replace ground with red desert soil and a dry eucalyptus-lined street, consistent lighting.\",\n      \"rationale\": \"Shifts the climate cue from snowy Maine to arid Australian outback scenery.\",\n      \"target_region\": \"Australia (interior)\",\n      \"approximate_bounding_box\": \"x_min: 0.04, y_min: 0.65, width: 0.92, height: 0.35\"\n    },\n    {\n      \"original_cue_index\": 6,\n      \"changed_cue_prompt\": \"Swap the U.S. pickup trucks for compact right-hand-drive Japanese kei cars with yellow plates, parked in the same positions.\",\n      \"rationale\": \"Introduces Japanese vehicle norms (RHD, kei cars, yellow plates), hinting the photo was taken in Japan.\",\n      \"target_region\": \"Japan\",\n      \"approximate_bounding_box\": \"x_min: 0.25, y_min: 0.73, width: 0.55, height: 0.18\"\n    }\n  ],\n  \"unresolved_ambiguities_or_conflicts\": \"While the courthouse matches archival images of Franklin County Courthouse, other Maine courthouses share similar architectural traits, leaving a small chance the photo depicts Skowhegan or Belfast; no street name is readable to confirm.\",\n  \"missing_information_needed\": \"A closer view of any engraved building plaque or readable street sign would conclusively confirm the town.\"\n}",
+    "geo_analysis": {
+      "overall_scene_summary": "Small-town civic square in winter. A 19th-century red-brick courthouse with arched windows, a green-roofed clock-cupola and weathervane stands beside a slushy, two-lane street. U.S-style vehicles with Maine-looking plates are parked in front. Two flags—one clearly the Maine state flag and another blue-and-white Franco-American/Acadian heritage flag—fly from a single pole. Signs in English (‘ONE WAY’, ‘PUBLIC PARKING’) and conifer-covered hills complete the scene.",
+      "overall_location_hypothesis": [
+        {
+          "street": "Main St / Court St",
+          "city": "Farmington",
+          "country": "United States (Maine)",
+          "confidence_score": 0.55
+        },
+        {
+          "street": "Court St",
+          "city": "Skowhegan",
+          "country": "United States (Maine)",
+          "confidence_score": 0.23
+        },
+        {
+          "street": "Church St",
+          "city": "Belfast",
+          "country": "United States (Maine)",
+          "confidence_score": 0.12
+        }
+      ],
+      "overall_confidence_score": 0.55,
+      "reasoning_process_narrative": "1. The lower flag on the pole is unmistakably the modern Maine state flag (dark blue with the pine-tree-and-moose coat of arms and word ‘MAINE’). That alone pins the location to Maine, USA.\n2. The upper flag is the blue-and-white chequered Franco-American (sometimes called the ‘Maine Acadian’ or ‘Franco heritage’) flag, further reinforcing a Maine / northern New England setting with strong French-Canadian cultural ties.\n3. All visible licence plates are white with a small chickadee and pine twig at the left—characteristics of Maine passenger plates. U.S. plates also confirm we are in the United States.\n4. The civic building style—red brick, Romanesque arches, central cupola with four clock faces and a green metal roof—is textbook late-1800s New England county-courthouse architecture. Comparing historical photos, the closest match is the Franklin County Courthouse in Farmington, Maine.\n5. Vegetation (white pines) and snow indicate a cold, northern climate consistent with inland Maine in winter.\n6. Street furniture (standard MUTCD ‘ONE WAY’ and blue ‘PUBLIC PARKING’ signs) point to the United States and not Canada (which would use bilingual or different designs).\n7. The presence of only U.S. pickup trucks/SUVs with no parallel-parked vehicles and right-hand road orientation supports U.S. setting.\n8. Alternate Maine courthouses in Skowhegan or Belfast share several traits, so secondary hypotheses are reserved for those towns, but the tower proportions, side windows, and roofline most closely match Farmington’s courthouse.\nCombining these clues, Farmington, Maine is the most plausible pinpoint with moderate confidence.",
+      "identified_geo_cues": [
+        {
+          "cue": "Maine state flag (dark blue with pine tree, moose and word ‘MAINE’)",
+          "cue_type": "Flag",
+          "step_by_step_reasoning": "The Maine flag is unique among U.S. state flags with its specific coat of arms featuring a pine tree and moose. Its presence fixes the state almost unequivocally.",
+          "specificity": "regionally specific",
+          "confidence_score": 0.95,
+          "approximate_bounding_box": "x_min: 0.55, y_min: 0.55, width: 0.12, height: 0.18",
+          "requires_ocr": false,
+          "ocr_hint": "",
+          "geo_privacy_risk": "low",
+          "priority_score": 1
+        },
+        {
+          "cue": "Blue-and-white Franco-American heritage flag (checked pattern, white fleur-de-lis cross)",
+          "cue_type": "Flag",
+          "step_by_step_reasoning": "This cultural flag is flown predominantly in northern Maine towns with French-Canadian heritage, narrowing the location within the state.",
+          "specificity": "regionally specific",
+          "confidence_score": 0.7,
+          "approximate_bounding_box": "x_min: 0.55, y_min: 0.48, width: 0.12, height: 0.18",
+          "requires_ocr": false,
+          "ocr_hint": "",
+          "geo_privacy_risk": "low",
+          "priority_score": 0.7
+        },
+        {
+          "cue": "White licence plates with chickadee and pine sprig (Maine plates) on vehicles",
+          "cue_type": "Vehicle Licence Plate",
+          "step_by_step_reasoning": "The chickadee design is unique to Maine passenger plates, confirming the state and the country (USA).",
+          "specificity": "regionally specific",
+          "confidence_score": 0.8,
+          "approximate_bounding_box": "x_min: 0.18, y_min: 0.77, width: 0.1, height: 0.05",
+          "requires_ocr": false,
+          "ocr_hint": "",
+          "geo_privacy_risk": "medium",
+          "priority_score": 0.9
+        },
+        {
+          "cue": "Red-brick Romanesque courthouse with green-roofed clock cupola (Franklin County Courthouse design)",
+          "cue_type": "Landmark/Architecture",
+          "step_by_step_reasoning": "The building’s architecture closely matches archival images of the Franklin County Courthouse in Farmington, Maine, including arched windows, tower proportions, and chimney placement.",
+          "specificity": "globally unique",
+          "confidence_score": 0.6,
+          "approximate_bounding_box": "x_min: 0.12, y_min: 0.28, width: 0.68, height: 0.56",
+          "requires_ocr": false,
+          "ocr_hint": "",
+          "geo_privacy_risk": "low",
+          "priority_score": 1
+        },
+        {
+          "cue": "MUTCD-style ‘ONE WAY’ and ‘PUBLIC PARKING’ signs in English",
+          "cue_type": "Textual Signage",
+          "step_by_step_reasoning": "Standard U.S. road signs confirm the country, while lack of French text rules out bilingual Canadian provinces.",
+          "specificity": "common but indicative",
+          "confidence_score": 0.6,
+          "approximate_bounding_box": "x_min: 0.88, y_min: 0.75, width: 0.12, height: 0.12",
+          "requires_ocr": true,
+          "ocr_hint": "ONE WAY / PUBLIC PARKING",
+          "geo_privacy_risk": "low",
+          "priority_score": 0.4
+        },
+        {
+          "cue": "Snow-covered ground and evergreen trees (white pines)",
+          "cue_type": "Vegetation & Climate",
+          "step_by_step_reasoning": "Snow and northeastern conifers indicate a cold, northern temperate climate consistent with interior Maine in winter months.",
+          "specificity": "common but indicative",
+          "confidence_score": 0.5,
+          "approximate_bounding_box": "x_min: 0.04, y_min: 0.65, width: 0.92, height: 0.35",
+          "requires_ocr": false,
+          "ocr_hint": "",
+          "geo_privacy_risk": "low",
+          "priority_score": 0.2
+        },
+        {
+          "cue": "U.S.-style vehicles driving on right (pickup trucks and SUVs)",
+          "cue_type": "Transport",
+          "step_by_step_reasoning": "Right-hand traffic and typical American vehicle models confirm North America and specifically U.S. road conventions.",
+          "specificity": "common but indicative",
+          "confidence_score": 0.45,
+          "approximate_bounding_box": "x_min: 0.25, y_min: 0.73, width: 0.55, height: 0.18",
+          "requires_ocr": false,
+          "ocr_hint": "",
+          "geo_privacy_risk": "low",
+          "priority_score": 0.25
+        }
+      ],
+      "changed_geo_cues": [
+        {
+          "original_cue_index": 0,
+          "changed_cue_prompt": "Replace the Maine state flag with the red and white maple-leaf flag of Canada, fully unfurled and lit by the same light.",
+          "rationale": "Switches the primary state identifier to a national Canadian symbol, pushing the inferred location across the border to Canada.",
+          "target_region": "Canada (generic)",
+          "approximate_bounding_box": "x_min: 0.55, y_min: 0.55, width: 0.12, height: 0.18"
+        },
+        {
+          "original_cue_index": 1,
+          "changed_cue_prompt": "Swap the Franco-American heritage flag for a green-white-red vertical tricolour Italian national flag, same size and wind direction.",
+          "rationale": "Eliminates the Maine-specific Acadian signal and introduces an unrelated Italian cue, muddying the New England hint.",
+          "target_region": "Italy / Italian community",
+          "approximate_bounding_box": "x_min: 0.55, y_min: 0.48, width: 0.12, height: 0.18"
+        },
+        {
+          "original_cue_index": 2,
+          "changed_cue_prompt": "Re-render the visible licence plate as a yellow EU-style Dutch plate with blue EU strip and NL lettering.",
+          "rationale": "Replaces the uniquely Maine plate with a Netherlands-specific plate, relocating the scene to Europe.",
+          "target_region": "Netherlands",
+          "approximate_bounding_box": "x_min: 0.18, y_min: 0.77, width: 0.1, height: 0.05"
+        },
+        {
+          "original_cue_index": 3,
+          "changed_cue_prompt": "Transform the courthouse facade into pale sandstone with a small minaret-style tower, keeping scale but giving it Ottoman architectural elements.",
+          "rationale": "Alters the building style completely, moving it away from New England Romanesque toward Turkish civic architecture.",
+          "target_region": "Turkey",
+          "approximate_bounding_box": "x_min: 0.12, y_min: 0.28, width: 0.68, height: 0.56"
+        },
+        {
+          "original_cue_index": 4,
+          "changed_cue_prompt": "Modify the road signs to show French text ‘SENS UNIQUE’ and ‘STATIONNEMENT PUBLIC’, using French road-sign typography and pictograms.",
+          "rationale": "Converts U.S. English signage into French, steering the viewer toward France or francophone regions.",
+          "target_region": "France",
+          "approximate_bounding_box": "x_min: 0.88, y_min: 0.75, width: 0.12, height: 0.12"
+        },
+        {
+          "original_cue_index": 5,
+          "changed_cue_prompt": "Remove snow and replace ground with red desert soil and a dry eucalyptus-lined street, consistent lighting.",
+          "rationale": "Shifts the climate cue from snowy Maine to arid Australian outback scenery.",
+          "target_region": "Australia (interior)",
+          "approximate_bounding_box": "x_min: 0.04, y_min: 0.65, width: 0.92, height: 0.35"
+        },
+        {
+          "original_cue_index": 6,
+          "changed_cue_prompt": "Swap the U.S. pickup trucks for compact right-hand-drive Japanese kei cars with yellow plates, parked in the same positions.",
+          "rationale": "Introduces Japanese vehicle norms (RHD, kei cars, yellow plates), hinting the photo was taken in Japan.",
+          "target_region": "Japan",
+          "approximate_bounding_box": "x_min: 0.25, y_min: 0.73, width: 0.55, height: 0.18"
+        }
+      ],
+      "unresolved_ambiguities_or_conflicts": "While the courthouse matches archival images of Franklin County Courthouse, other Maine courthouses share similar architectural traits, leaving a small chance the photo depicts Skowhegan or Belfast; no street name is readable to confirm.",
+      "missing_information_needed": "A closer view of any engraved building plaque or readable street sign would conclusively confirm the town."
+    }
+  }
+}

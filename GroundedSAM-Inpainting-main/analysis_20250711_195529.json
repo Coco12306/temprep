@@ -1,0 +1,159 @@
+{
+  "meta": {
+    "image_path": "/home/wan/geopipeline/GroundedSAM-Inpainting-main/GroundedSAM+Inpainting/Grounded_Segment_Anything/assets/DoleStreet.jpg",
+    "saved_at": "20250711_195529"
+  },
+  "request": {
+    "system_prompt": "\nYou are an expert Geo-Location Analyst and seasoned GeoGuessr player.\nYour task is to thoroughly analyze the image and identify ALL possible visual, textual, and contextual cues that could reveal or strongly suggest its geographic location.\n\nPlease provide the results in **JSON format** and include the following:\n\n1. **overall_scene_summary**: A brief description of the overall scene in the image. This should include key visual elements (e.g., \"Urban street with modern buildings and palm trees in a warm climate\").\n2. **overall_location_hypothesis**: A list of three possible geographic locations, in the following format:\n   - Please provide the three most likely locations based on the clues in the image and confident score.\n3. **overall_confidence_score**: A confidence score (0.0 to 1.0) for the overall location hypothesis. The higher the number, the more confident the model is in the hypothesis.\n4. **reasoning_process_narrative**: A detailed, step-by-step explanation of how you arrived at the geographic location hypothesis. Please explain the reasoning for each clue you identified.\n\nFor each geographic cue, provide the following details:\n- `cue`: A description of the visual or textual clue.\n- `cue_type`: The type of clue (e.g., Landmark, Vegetation, Textual Signage).\n- `step_by_step_reasoning`: Detailed reasoning for identifying this cue's geographic significance.\n- `specificity`: How unique or specific the cue is. Possible values:\n  - \"globally unique\": The cue is unique worldwide and can almost certainly pinpoint the location.\n  - \"regionally specific\": The cue is identifiable within a particular region or country.\n  - \"common but indicative\": The cue is common but still provides useful geographic information.\n- `confidence_score`: A confidence score (0.0 to 1.0) for the cue's relevance.\n- `approximate_bounding_box`: The location of the cue within the image. Use relative coordinates:\n  - `\"x_min: 0.1, y_min: 0.2, width: 0.3, height: 0.4\"`\n  - `x_min` is the starting x-coordinate (left side of the image),\n  - `y_min` is the starting y-coordinate (top side of the image),\n  - `width` and `height` are the proportions of the image width and height for this bounding box.\n- `requires_ocr`: True if the clue requires OCR, otherwise False.\n- `ocr_hint`: The text that might be relevant for OCR, if applicable.\n- `geo_privacy_risk`: The privacy risk level of the cue. Possible values: \"low\", \"medium\", \"high\".\n- `priority_score`: A score indicating how important the cue is for identifying the location (1 = high priority, 0 = low priority).\n\n\nPlease return the results in the following format:\n\n{\n  \"overall_scene_summary\": \"\",\n  \"overall_location_hypothesis\": [\n    {\"street\": \"\", \"city\": \"\", \"country\": \"\", \"confidence_score\": 0.0},\n    {\"street\": \"\", \"city\": \"\", \"country\": \"\", \"confidence_score\": 0.0},\n    {\"street\": \"\", \"city\": \"\", \"country\": \"\", \"confidence_score\": 0.0}\n  ],\n  \"overall_confidence_score\": 0.0,\n  \"reasoning_process_narrative\": \"\",\n  \"identified_geo_cues\": [\n    {\n      \"cue\": \"\",\n      \"cue_type\": \"\",\n      \"step_by_step_reasoning\": \"\",\n      \"specificity\": \"\",\n      \"confidence_score\": 0.0,\n      \"approximate_bounding_box\": \"\",\n      \"requires_ocr\": false,\n      \"ocr_hint\": \"\",\n      \"geo_privacy_risk\": \"\",  \n      \"priority_score\": 0.0    \n    }\n  ],\n  \"changed_geo_cues\": [\n    {\n      \"original_cue_index\": 0,\n      \"changed_cue_prompt\": \"\",\n      \"rationale\": \"\",\n      \"target_region\": \"\",\n      \"approximate_bounding_box\": \"\"\n    }\n  ],\n  \"unresolved_ambiguities_or_conflicts\": \"\",\n  \"missing_information_needed\": \"\"\n}\n\n---------------------------------------------\n✂️  NEW REQUIREMENT – ‘changed_geo_cues’\n---------------------------------------------\nFor each item in `identified_geo_cues`, devise **one** realistic\n*replacement* that would point to a geographically **different** region\n(ideally on another continent) while fitting naturally into the same\nspot of the image.\n\nReturn them in a `changed_geo_cues` array with this structure:\n\n- original_cue_index      : integer – index into identified_geo_cues\n- changed_cue_prompt      : <English prompt for an in-painting model,\n                             describing exactly what to draw there>\n- rationale               : why this replacement breaks or flips the\n                             original geolocation signal\n- target_region           : the region/country it now suggests\n- approximate_bounding_box: copy the bbox of the original cue\n\nGuidelines for good replacements\n• Keep the object category the same (flag→flag, plate→plate, sign→sign).\n• Choose *visually plausible* alternatives – e.g. “German EU license\n  plate”, “Japanese Kanji street sign”, “Sydney bus stop sign”.\n• Avoid simply saying “blur it”; instead propose a concrete substitute.\n• Do **NOT** change the JSON key names or overall order.\n",
+    "user_message": "Please analyze the photo for geo-location.",
+    "image_base64_prefix": "/9j/4AAQSkZJRgABAQAAAQABAAD/4gIcSUNDX1BST0ZJTEUAAQEAAAIMbGNt…"
+  },
+  "response": {
+    "model_raw_json": "{\n  \"overall_scene_summary\": \"Sun-lit urban intersection with multiple lanes of traffic, U.S-style traffic lights and pedestrian signals, green street-name signs reading “DOLE St” and “UNIVERSITY Av,” lush tropical trees, and a backdrop of mid- to high-rise buildings suggestive of a coastal city. Cars carry U.S-format license plates.\",\n  \"overall_location_hypothesis\": [\n    {\n      \"street\": \"Dole St & University Ave\",\n      \"city\": \"Honolulu (Mōʻiliʻili / University District)\",\n      \"country\": \"United States (Hawai‘i)\",\n      \"confidence_score\": 0.85\n    },\n    {\n      \"street\": \"University Ave near tropical-planted arterial (alternate Dole-named street)\",\n      \"city\": \"Miami, Florida\",\n      \"country\": \"United States\",\n      \"confidence_score\": 0.10\n    },\n    {\n      \"street\": \"Intersection with U.S-style signage in a Pacific U.S. territory\",\n      \"city\": \"Tamuning\",\n      \"country\": \"Guam (U.S.)\",\n      \"confidence_score\": 0.05\n    }\n  ],\n  \"overall_confidence_score\": 0.85,\n  \"reasoning_process_narrative\": \"1) The green street signs clearly display the names “DOLE St” (block 2400) and “UNIVERSITY Av.”  A Google or mental recall check by seasoned GeoGuessr players links that exact intersection to Honolulu, adjacent to the University of Hawai‘i at Mānoa campus. 2) The abundance of large, broad-canopy tropical trees points to a warm, humid climate year-round; palms are not visible here, but the tree species and density match common Honolulu streets. 3) The skyline in the distance features several recognizable Honolulu towers, including cylindrical and slab-style residential buildings common in Ala Moana / Makiki. 4) U.S-style traffic signals, pedestrian “hand” icon, and MUTCD-conformant signage confirm the country. 5) Vehicles use front license plates with a squarish state emblem, consistent with Hawai‘i’s rainbow base plate. 6) The Dole surname is historically tied to Hawai‘i (Sanford B. Dole, James Dole of pineapple fame), and streets bearing that name are most prominent in Honolulu. Combining all cues yields high confidence for Honolulu, Hawai‘i.\",\n  \"identified_geo_cues\": [\n    {\n      \"cue\": \"\\\"DOLE St\\\" green street sign with block number 2400\",\n      \"cue_type\": \"Textual Signage\",\n      \"step_by_step_reasoning\": \"The name ‘Dole’ is historically associated with Hawai‘i (Dole Food Company, Sanford B. Dole).  A 2400-block Dole Street exists in Honolulu adjoining the University campus.\",\n      \"specificity\": \"regionally specific\",\n      \"confidence_score\": 0.9,\n      \"approximate_bounding_box\": \"x_min: 0.61, y_min: 0.07, width: 0.18, height: 0.10\",\n      \"requires_ocr\": true,\n      \"ocr_hint\": \"DOLE ST 2400\",\n      \"geo_privacy_risk\": \"low\",\n      \"priority_score\": 1\n    },\n    {\n      \"cue\": \"\\\"UNIVERSITY Av\\\" secondary street sign (block 1600)\",\n      \"cue_type\": \"Textual Signage\",\n      \"step_by_step_reasoning\": \"University Avenue intersects Dole Street in Honolulu by the University of Hawai‘i at Mānoa; pairing the two names locks the intersection.\",\n      \"specificity\": \"regionally specific\",\n      \"confidence_score\": 0.85,\n      \"approximate_bounding_box\": \"x_min: 0.63, y_min: 0.15, width: 0.15, height: 0.08\",\n      \"requires_ocr\": true,\n      \"ocr_hint\": \"UNIVERSITY AV\",\n      \"geo_privacy_risk\": \"low\",\n      \"priority_score\": 1\n    },\n    {\n      \"cue\": \"Tropical broad-leaf trees lining the street\",\n      \"cue_type\": \"Vegetation\",\n      \"step_by_step_reasoning\": \"Large, dense, evergreen canopy plants point to a tropical or subtropical climate, matching Honolulu’s flora.\",\n      \"specificity\": \"common but indicative\",\n      \"confidence_score\": 0.6,\n      \"approximate_bounding_box\": \"x_min: 0.02, y_min: 0.20, width: 0.28, height: 0.38\",\n      \"requires_ocr\": false,\n      \"ocr_hint\": \"\",\n      \"geo_privacy_risk\": \"low\",\n      \"priority_score\": 0.4\n    },\n    {\n      \"cue\": \"Cluster of mid/high-rise residential towers in background, including cylindrical tower\",\n      \"cue_type\": \"Landmark / Skyline\",\n      \"step_by_step_reasoning\": \"Honolulu’s skyline contains distinctive cylindrical and beige slab towers visible from the University district toward Ala Moana; seeing them aligns perspective.\",\n      \"specificity\": \"regionally specific\",\n      \"confidence_score\": 0.7,\n      \"approximate_bounding_box\": \"x_min: 0.39, y_min: 0.05, width: 0.23, height: 0.35\",\n      \"requires_ocr\": false,\n      \"ocr_hint\": \"\",\n      \"geo_privacy_risk\": \"low\",\n      \"priority_score\": 0.7\n    },\n    {\n      \"cue\": \"U.S-style traffic light with red ‘hand’ pedestrian signal\",\n      \"cue_type\": \"Infrastructure\",\n      \"step_by_step_reasoning\": \"Standard MUTCD hardware narrows the country to the United States or territories.\",\n      \"specificity\": \"common but indicative\",\n      \"confidence_score\": 0.55,\n      \"approximate_bounding_box\": \"x_min: 0.26, y_min: 0.28, width: 0.05, height: 0.22\",\n      \"requires_ocr\": false,\n      \"ocr_hint\": \"\",\n      \"geo_privacy_risk\": \"low\",\n      \"priority_score\": 0.3\n    },\n    {\n      \"cue\": \"Cars with Hawai‘i-format front license plates (white base, subtle rainbow arch)\",\n      \"cue_type\": \"Vehicle / License Plate\",\n      \"step_by_step_reasoning\": \"Although blurry, the plates’ color scheme and mandatory front plate rule match Hawai‘i; several mainland states with similar plates do not require front plates.\",\n      \"specificity\": \"regionally specific\",\n      \"confidence_score\": 0.65,\n      \"approximate_bounding_box\": \"x_min: 0.54, y_min: 0.53, width: 0.28, height: 0.19\",\n      \"requires_ocr\": false,\n      \"ocr_hint\": \"\",\n      \"geo_privacy_risk\": \"low\",\n      \"priority_score\": 0.5\n    }\n  ],\n  \"changed_geo_cues\": [\n    {\n      \"original_cue_index\": 0,\n      \"changed_cue_prompt\": \"Replace the green street sign text so that it reads \\\"GEORGE St\\\" with block number \\\"300\\\" while keeping the same font, color, and style.\",\n      \"rationale\": \"George Street is famously associated with central Sydney, Australia; swapping the name shifts the presumed location from Honolulu to Sydney while retaining visual plausibility of a green street sign.\",\n      \"target_region\": \"Sydney, Australia\",\n      \"approximate_bounding_box\": \"x_min: 0.61, y_min: 0.07, width: 0.18, height: 0.10\"\n    },\n    {\n      \"original_cue_index\": 1,\n      \"changed_cue_prompt\": \"Alter the secondary street sign so it reads \\\"ELIZABETH St\\\" with block number \\\"150\\\" in the same green sign format.\",\n      \"rationale\": \"Elizabeth Street intersects George Street in central Sydney; this pairing would strongly suggest Australia instead of Hawai‘i.\",\n      \"target_region\": \"Sydney, Australia\",\n      \"approximate_bounding_box\": \"x_min: 0.63, y_min: 0.15, width: 0.15, height: 0.08\"\n    },\n    {\n      \"original_cue_index\": 2,\n      \"changed_cue_prompt\": \"Replace the broad-leaf tropical trees with tall, slender birch trees showing early autumn yellow leaves.\",\n      \"rationale\": \"Birch trees thrive in temperate climates such as Northern Europe, contradicting the tropical cue and pointing toward regions like Scandinavia.\",\n      \"target_region\": \"Stockholm, Sweden\",\n      \"approximate_bounding_box\": \"x_min: 0.02, y_min: 0.20, width: 0.28, height: 0.38\"\n    },\n    {\n      \"original_cue_index\": 3,\n      \"changed_cue_prompt\": \"Swap the distant skyline with a view of the distinctive CN Tower and surrounding Toronto high-rises, matching lighting and haze.\",\n      \"rationale\": \"Inserting Toronto’s landmark CN Tower would unmistakably re-locate the scene to Canada.\",\n      \"target_region\": \"Toronto, Canada\",\n      \"approximate_bounding_box\": \"x_min: 0.39, y_min: 0.05, width: 0.23, height: 0.35\"\n    },\n    {\n      \"original_cue_index\": 4,\n      \"changed_cue_prompt\": \"Change the pedestrian signal to the European style – a circular red ‘standing man’ inside a black housing.\",\n      \"rationale\": \"European traffic signals use pictograms rather than the U.S. hand symbol, steering the viewer toward Europe.\",\n      \"target_region\": \"Germany\",\n      \"approximate_bounding_box\": \"x_min: 0.26, y_min: 0.28, width: 0.05, height: 0.22\"\n    },\n    {\n      \"original_cue_index\": 5,\n      \"changed_cue_prompt\": \"Modify the visible license plates so they use the yellow British ‘GB’ style with black characters and a blue EU stripe on the left.\",\n      \"rationale\": \"UK-style plates clearly relocate the scene to Britain, conflicting with the Hawai‘i clue.\",\n      \"target_region\": \"United Kingdom\",\n      \"approximate_bounding_box\": \"x_min: 0.54, y_min: 0.53, width: 0.28, height: 0.19\"\n    }\n  ],\n  \"unresolved_ambiguities_or_conflicts\": \"The skyline towers are slightly blurred, making 100 % identification of Honolulu buildings difficult; however, the street names and tropical vegetation outweigh this minor uncertainty.\",\n  \"missing_information_needed\": \"An unobstructed view of license plates or additional Hawaiian-specific signage (e.g., Hawaiian diacritics) would raise certainty from 0.85 toward 0.95+.\"\n}",
+    "geo_analysis": {
+      "overall_scene_summary": "Sun-lit urban intersection with multiple lanes of traffic, U.S-style traffic lights and pedestrian signals, green street-name signs reading “DOLE St” and “UNIVERSITY Av,” lush tropical trees, and a backdrop of mid- to high-rise buildings suggestive of a coastal city. Cars carry U.S-format license plates.",
+      "overall_location_hypothesis": [
+        {
+          "street": "Dole St & University Ave",
+          "city": "Honolulu (Mōʻiliʻili / University District)",
+          "country": "United States (Hawai‘i)",
+          "confidence_score": 0.85
+        },
+        {
+          "street": "University Ave near tropical-planted arterial (alternate Dole-named street)",
+          "city": "Miami, Florida",
+          "country": "United States",
+          "confidence_score": 0.1
+        },
+        {
+          "street": "Intersection with U.S-style signage in a Pacific U.S. territory",
+          "city": "Tamuning",
+          "country": "Guam (U.S.)",
+          "confidence_score": 0.05
+        }
+      ],
+      "overall_confidence_score": 0.85,
+      "reasoning_process_narrative": "1) The green street signs clearly display the names “DOLE St” (block 2400) and “UNIVERSITY Av.”  A Google or mental recall check by seasoned GeoGuessr players links that exact intersection to Honolulu, adjacent to the University of Hawai‘i at Mānoa campus. 2) The abundance of large, broad-canopy tropical trees points to a warm, humid climate year-round; palms are not visible here, but the tree species and density match common Honolulu streets. 3) The skyline in the distance features several recognizable Honolulu towers, including cylindrical and slab-style residential buildings common in Ala Moana / Makiki. 4) U.S-style traffic signals, pedestrian “hand” icon, and MUTCD-conformant signage confirm the country. 5) Vehicles use front license plates with a squarish state emblem, consistent with Hawai‘i’s rainbow base plate. 6) The Dole surname is historically tied to Hawai‘i (Sanford B. Dole, James Dole of pineapple fame), and streets bearing that name are most prominent in Honolulu. Combining all cues yields high confidence for Honolulu, Hawai‘i.",
+      "identified_geo_cues": [
+        {
+          "cue": "\"DOLE St\" green street sign with block number 2400",
+          "cue_type": "Textual Signage",
+          "step_by_step_reasoning": "The name ‘Dole’ is historically associated with Hawai‘i (Dole Food Company, Sanford B. Dole).  A 2400-block Dole Street exists in Honolulu adjoining the University campus.",
+          "specificity": "regionally specific",
+          "confidence_score": 0.9,
+          "approximate_bounding_box": "x_min: 0.61, y_min: 0.07, width: 0.18, height: 0.10",
+          "requires_ocr": true,
+          "ocr_hint": "DOLE ST 2400",
+          "geo_privacy_risk": "low",
+          "priority_score": 1
+        },
+        {
+          "cue": "\"UNIVERSITY Av\" secondary street sign (block 1600)",
+          "cue_type": "Textual Signage",
+          "step_by_step_reasoning": "University Avenue intersects Dole Street in Honolulu by the University of Hawai‘i at Mānoa; pairing the two names locks the intersection.",
+          "specificity": "regionally specific",
+          "confidence_score": 0.85,
+          "approximate_bounding_box": "x_min: 0.63, y_min: 0.15, width: 0.15, height: 0.08",
+          "requires_ocr": true,
+          "ocr_hint": "UNIVERSITY AV",
+          "geo_privacy_risk": "low",
+          "priority_score": 1
+        },
+        {
+          "cue": "Tropical broad-leaf trees lining the street",
+          "cue_type": "Vegetation",
+          "step_by_step_reasoning": "Large, dense, evergreen canopy plants point to a tropical or subtropical climate, matching Honolulu’s flora.",
+          "specificity": "common but indicative",
+          "confidence_score": 0.6,
+          "approximate_bounding_box": "x_min: 0.02, y_min: 0.20, width: 0.28, height: 0.38",
+          "requires_ocr": false,
+          "ocr_hint": "",
+          "geo_privacy_risk": "low",
+          "priority_score": 0.4
+        },
+        {
+          "cue": "Cluster of mid/high-rise residential towers in background, including cylindrical tower",
+          "cue_type": "Landmark / Skyline",
+          "step_by_step_reasoning": "Honolulu’s skyline contains distinctive cylindrical and beige slab towers visible from the University district toward Ala Moana; seeing them aligns perspective.",
+          "specificity": "regionally specific",
+          "confidence_score": 0.7,
+          "approximate_bounding_box": "x_min: 0.39, y_min: 0.05, width: 0.23, height: 0.35",
+          "requires_ocr": false,
+          "ocr_hint": "",
+          "geo_privacy_risk": "low",
+          "priority_score": 0.7
+        },
+        {
+          "cue": "U.S-style traffic light with red ‘hand’ pedestrian signal",
+          "cue_type": "Infrastructure",
+          "step_by_step_reasoning": "Standard MUTCD hardware narrows the country to the United States or territories.",
+          "specificity": "common but indicative",
+          "confidence_score": 0.55,
+          "approximate_bounding_box": "x_min: 0.26, y_min: 0.28, width: 0.05, height: 0.22",
+          "requires_ocr": false,
+          "ocr_hint": "",
+          "geo_privacy_risk": "low",
+          "priority_score": 0.3
+        },
+        {
+          "cue": "Cars with Hawai‘i-format front license plates (white base, subtle rainbow arch)",
+          "cue_type": "Vehicle / License Plate",
+          "step_by_step_reasoning": "Although blurry, the plates’ color scheme and mandatory front plate rule match Hawai‘i; several mainland states with similar plates do not require front plates.",
+          "specificity": "regionally specific",
+          "confidence_score": 0.65,
+          "approximate_bounding_box": "x_min: 0.54, y_min: 0.53, width: 0.28, height: 0.19",
+          "requires_ocr": false,
+          "ocr_hint": "",
+          "geo_privacy_risk": "low",
+          "priority_score": 0.5
+        }
+      ],
+      "changed_geo_cues": [
+        {
+          "original_cue_index": 0,
+          "changed_cue_prompt": "Replace the green street sign text so that it reads \"GEORGE St\" with block number \"300\" while keeping the same font, color, and style.",
+          "rationale": "George Street is famously associated with central Sydney, Australia; swapping the name shifts the presumed location from Honolulu to Sydney while retaining visual plausibility of a green street sign.",
+          "target_region": "Sydney, Australia",
+          "approximate_bounding_box": "x_min: 0.61, y_min: 0.07, width: 0.18, height: 0.10"
+        },
+        {
+          "original_cue_index": 1,
+          "changed_cue_prompt": "Alter the secondary street sign so it reads \"ELIZABETH St\" with block number \"150\" in the same green sign format.",
+          "rationale": "Elizabeth Street intersects George Street in central Sydney; this pairing would strongly suggest Australia instead of Hawai‘i.",
+          "target_region": "Sydney, Australia",
+          "approximate_bounding_box": "x_min: 0.63, y_min: 0.15, width: 0.15, height: 0.08"
+        },
+        {
+          "original_cue_index": 2,
+          "changed_cue_prompt": "Replace the broad-leaf tropical trees with tall, slender birch trees showing early autumn yellow leaves.",
+          "rationale": "Birch trees thrive in temperate climates such as Northern Europe, contradicting the tropical cue and pointing toward regions like Scandinavia.",
+          "target_region": "Stockholm, Sweden",
+          "approximate_bounding_box": "x_min: 0.02, y_min: 0.20, width: 0.28, height: 0.38"
+        },
+        {
+          "original_cue_index": 3,
+          "changed_cue_prompt": "Swap the distant skyline with a view of the distinctive CN Tower and surrounding Toronto high-rises, matching lighting and haze.",
+          "rationale": "Inserting Toronto’s landmark CN Tower would unmistakably re-locate the scene to Canada.",
+          "target_region": "Toronto, Canada",
+          "approximate_bounding_box": "x_min: 0.39, y_min: 0.05, width: 0.23, height: 0.35"
+        },
+        {
+          "original_cue_index": 4,
+          "changed_cue_prompt": "Change the pedestrian signal to the European style – a circular red ‘standing man’ inside a black housing.",
+          "rationale": "European traffic signals use pictograms rather than the U.S. hand symbol, steering the viewer toward Europe.",
+          "target_region": "Germany",
+          "approximate_bounding_box": "x_min: 0.26, y_min: 0.28, width: 0.05, height: 0.22"
+        },
+        {
+          "original_cue_index": 5,
+          "changed_cue_prompt": "Modify the visible license plates so they use the yellow British ‘GB’ style with black characters and a blue EU stripe on the left.",
+          "rationale": "UK-style plates clearly relocate the scene to Britain, conflicting with the Hawai‘i clue.",
+          "target_region": "United Kingdom",
+          "approximate_bounding_box": "x_min: 0.54, y_min: 0.53, width: 0.28, height: 0.19"
+        }
+      ],
+      "unresolved_ambiguities_or_conflicts": "The skyline towers are slightly blurred, making 100 % identification of Honolulu buildings difficult; however, the street names and tropical vegetation outweigh this minor uncertainty.",
+      "missing_information_needed": "An unobstructed view of license plates or additional Hawaiian-specific signage (e.g., Hawaiian diacritics) would raise certainty from 0.85 toward 0.95+."
+    }
+  }
+}
